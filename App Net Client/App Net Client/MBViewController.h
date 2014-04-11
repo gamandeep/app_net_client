@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MBViewController : UIViewController
+@class MBJSONFetcher;
+
+@interface MBViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    MBJSONFetcher* mFetcher;
+    NSMutableArray* mLabelFrames;
+    
+    // the dispatch queue to load images
+    dispatch_queue_t queue;
+}
+
+@property (nonatomic, strong) UITableView* mTableView;
+@property (nonatomic, strong) NSMutableArray* mPostsArray;
+@property (nonatomic, strong) NSMutableDictionary* mImages;
+
+- (void)receivedResponse : (MBJSONFetcher*) aFetcher;
 
 @end

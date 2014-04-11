@@ -10,4 +10,9 @@
 
 @interface MBPostEntry : NSObject
 
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* text;
+@property (nonatomic, strong) NSString* imageURL;
+@property (nonatomic, strong) UIImage* image;
+
 @end

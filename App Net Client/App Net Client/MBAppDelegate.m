@@ -7,12 +7,18 @@
 //
 
 #import "MBAppDelegate.h"
+#import "MBViewController.h"
 
 @implementation MBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    MBViewController *controller = [[MBViewController alloc] init];
+    self.window.rootViewController = controller;
+    
+    [self.window addSubview:controller.view];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							

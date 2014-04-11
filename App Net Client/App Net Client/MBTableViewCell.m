@@ -10,9 +10,22 @@
 
 @implementation MBTableViewCell
 
-- (void)awakeFromNib
+@synthesize nameLabel;
+@synthesize postLabel;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    // Initialization code
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        
+    }
+    return self;
+}
+
+- (void) awakeFromNib
+{
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
