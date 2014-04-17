@@ -38,7 +38,7 @@
 		CE21374118F7C21200F6E30F /* MBTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE21373F18F7C21200F6E30F /* MBTableViewCell.m */; };
 		CE21374218F7C21200F6E30F /* MBTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE21374018F7C21200F6E30F /* MBTableViewCell.xib */; };
 		CE21374418F7C3EC00F6E30F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE21374318F7C3EC00F6E30F /* QuartzCore.framework */; };
-		CE21374618F7D51A00F6E30F /* Profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE21374518F7D51900F6E30F /* Profile.jpg */; };
+		CEE9BC2F19002A1A009EEBE1 /* Profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE9BC2E19002A1A009EEBE1 /* Profile.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +104,7 @@
 		CE21373F18F7C21200F6E30F /* MBTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewCell.m; sourceTree = "<group>"; };
 		CE21374018F7C21200F6E30F /* MBTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBTableViewCell.xib; sourceTree = "<group>"; };
 		CE21374318F7C3EC00F6E30F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CE21374518F7D51900F6E30F /* Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Profile.jpg; path = ../../../Pictures/Profile.jpg; sourceTree = "<group>"; };
+		CEE9BC2E19002A1A009EEBE1 /* Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Profile.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,7 @@
 		CE2136D018F7A59C00F6E30F = {
 			isa = PBXGroup;
 			children = (
-				CE21374518F7D51900F6E30F /* Profile.jpg */,
+				CEE9BC2E19002A1A009EEBE1 /* Profile.jpg */,
 				CE21371418F7B1FD00F6E30F /* OpenSource */,
 				CE2136E218F7A59C00F6E30F /* App Net Client */,
 				CE21370118F7A59D00F6E30F /* App Net ClientTests */,
@@ -336,7 +336,7 @@
 				CE2136E718F7A59C00F6E30F /* InfoPlist.strings in Resources */,
 				CE21374218F7C21200F6E30F /* MBTableViewCell.xib in Resources */,
 				CE2136F018F7A59C00F6E30F /* Main.storyboard in Resources */,
-				CE21374618F7D51A00F6E30F /* Profile.jpg in Resources */,
+				CEE9BC2F19002A1A009EEBE1 /* Profile.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +579,7 @@
 				CE21370D18F7A59D00F6E30F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE21370E18F7A59D00F6E30F /* Build configuration list for PBXNativeTarget "App Net ClientTests" */ = {
 			isa = XCConfigurationList;
@@ -587,6 +588,7 @@
 				CE21371018F7A59D00F6E30F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
