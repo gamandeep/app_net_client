@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"App Net Client";
     [self makeRequestForPosts];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -58,7 +59,7 @@
     NSArray* array = [NSArray arrayWithArray:[mFetcher.result objectForKey:@"data"]];
     mLabelFrames = [[NSMutableArray alloc] initWithCapacity:array.count];
     self.mImages = [[NSMutableDictionary alloc] init];
-    NSLog(@"%@", array[0]);
+//    NSLog(@"%@", array[0]);
     for (NSDictionary* dict in array)
     {
         MBPostEntry* entry = [[MBPostEntry alloc] init];
@@ -110,13 +111,13 @@
     MBTableViewCell *cell = (MBTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          cell.postLabel.font , NSFontAttributeName,
+                                          [UIFont systemFontOfSize:12] , NSFontAttributeName,
                                           nil];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString: text attributes:attributesDictionary];
 
     
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(200, 200) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(215, 200) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     
 
     //Calculate the new size based on the text
@@ -124,10 +125,10 @@
     
     
     //Dynamically figure out the padding for the cell
-    CGFloat topPadding = cell.postLabel.frame.origin.y - cell.frame.origin.y;
+    CGFloat topPadding = 35 - cell.frame.origin.y;
     
     
-    CGFloat bottomOfLabel = cell.postLabel.frame.origin.y + cell.postLabel.frame.size.height;
+    CGFloat bottomOfLabel = 95;
     CGFloat bottomPadding = cell.frame.size.height - bottomOfLabel;
     
     
@@ -138,8 +139,11 @@
     
 
     [mLabelFrames replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithInt: expectedLabelSize.height ]];
-    [cell.postLabel sizeToFit];
+    
+
     CGFloat cellHeight = expectedLabelSize.height + padding;
+    
+    cell.contentView.frame = CGRectMake(cell.contentView.frame.origin.x, cell.contentView.frame.origin.y, cell.frame.size.width, cellHeight);
     
     if (cellHeight < minimumHeight) {
         
@@ -174,11 +178,6 @@
         [self.mTableView registerNib:[UINib nibWithNibName:@"MBTableViewCell" bundle:nil] forCellReuseIdentifier:@"myCell"];
         cell = [self.mTableView dequeueReusableCellWithIdentifier:@"myCell"];
     }
-
-    cell.picView.layer.cornerRadius = 10.0;
-    cell.picView.layer.masksToBounds = YES;
-    cell.postLabel.frame = CGRectMake(cell.postLabel.frame.origin.x, cell.postLabel.frame.origin.y, cell.postLabel.frame.size.width, [[mLabelFrames objectAtIndex:indexPath.row] integerValue]);
-    
     return cell;
 }
 
@@ -186,26 +185,44 @@
 {
     MBPostEntry *entry = [self.mPostsArray objectAtIndex:indexPath.row];
     
+    if (cell.postLabel != nil)
+    {
+        [cell.postLabel removeFromSuperview];
+        cell.postLabel = nil;
+    }
     
     cell.nameLabel.text = entry.name;
-    cell.postLabel.text = entry.text;
-    cell.picView.image = [self imageForRowAtIndexPath:indexPath];
-    NSLog(@"%@ && %@", cell.nameLabel.text, entry.name);
     
+    cell.picView.image = [self imageForRowAtIndexPath:indexPath];
+    cell.picView.layer.cornerRadius = 15.0;
+    cell.picView.layer.masksToBounds = YES;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 35, 215, [[mLabelFrames objectAtIndex:indexPath.row] integerValue ])];
+    label.text = entry.text;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.numberOfLines = 0;
+    [label setFont:[UIFont systemFontOfSize:12]];
+    [cell.contentView addSubview:label];
+    cell.postLabel = label;
+
 }
 
 - (UIImage *)imageForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MBPostEntry *entry = [self.mPostsArray objectAtIndex:indexPath.row];
 
-    UIImage *image = [self.mImages objectForKey:entry.name];
+    UIImage *image = [self.mImages objectForKey:entry.imageURL];
     
     if(!image)
     {
         // if we didn't find an image, create a placeholder image and
         // put it in the "cache". Start the download of the actual image
-        image = [UIImage imageNamed:@"Profile.jpg"];
-        [self.mImages setValue:image forKey:entry.name];
+        image = [UIImage imageNamed:@"Profile.png"];
+        
+        if (entry.imageURL == nil)
+            return image;
+        
+        [self.mImages setValue:image forKey:entry.imageURL];
         
         //get the string version of the URL for the image
         NSString *url = entry.imageURL;
@@ -220,7 +237,7 @@
             
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
             UIImage *anImage = [UIImage imageWithData:data];
-            [self.mImages setValue:anImage forKey:entry.name];
+            [self.mImages setValue:anImage forKey:entry.imageURL];
             MBTableViewCell *cell = (MBTableViewCell*)[self.mTableView cellForRowAtIndexPath:indexPath];
             
             //dispatch_async on the main queue to update the UI

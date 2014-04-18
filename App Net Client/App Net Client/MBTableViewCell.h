@@ -10,8 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface MBTableViewCell : UITableViewCell
+
+{
+}
+
 @property (nonatomic, weak) IBOutlet UILabel* nameLabel;
-@property (nonatomic, weak) IBOutlet UILabel* postLabel;
+@property (nonatomic, retain) UILabel* postLabel;
 @property (nonatomic, weak) IBOutlet UIImageView* picView;
 
 @end

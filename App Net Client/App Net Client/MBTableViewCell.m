@@ -12,20 +12,20 @@
 
 @synthesize nameLabel;
 @synthesize postLabel;
+@synthesize picView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
     }
     return self;
 }
 
 - (void) awakeFromNib
 {
-    
+  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
